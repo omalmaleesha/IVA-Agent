@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCare AI Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="container mx-auto max-w-3xl p-4 h-screen flex flex-col">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-t-xl p-4 shadow-lg">
+            <div class="flex items-center space-x-4">
+                <div class="bg-white/20 p-2 rounded-full">
+                    <span class="material-icons text-2xl">medication</span>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold">HealthCare AI Assistant</h1>
+                    <p class="text-sm opacity-90">24/7 Medical Support</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div id="chat-container" class="flex-1 bg-white rounded-b-xl shadow-lg p-4 overflow-y-auto space-y-4">
+            <!-- Welcome Message -->
+            <div class="text-center text-gray-500 text-sm py-4">
+                <p>Welcome to your virtual health assistant</p>
+                <p>How can I help you today?</p>
+            </div>
+
+            <!-- Bot Message -->
+            <div class="flex items-start space-x-2">
+                <div class="bg-blue-100 p-3 rounded-2xl max-w-[85%]">
+                    <p class="text-gray-800">Hello! I'm your healthcare assistant. How can I help you today?</p>
+                    <span class="text-xs text-gray-500 mt-1 block">10:00 AM</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="mt-4 bg-white rounded-xl shadow-lg p-2">
+            <div class="flex items-center space-x-2">
+                <input type="text" id="user-input"
+                       class="flex-1 p-3 rounded-lg border-0 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                       placeholder="Type your health concern...">
+                <button id="send-btn"
+                        class="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    <span class="material-icons">send</span>
+                </button>
+            </div>
+            <p class="text-xs text-gray-500 mt-2 px-2">Please note: This is not a substitute for professional medical advice</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatContainer = document.getElementById('chat-container');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            let conversationId = null;
+
+            function createMessageElement(role, message) {
+                const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `flex items-start ${role === 'user' ? 'justify-end' : ''} space-x-2`;
+
+                const content = `
+                    <div class="${role === 'user' ? 'bg-blue-600 text-white' : 'bg-blue-100'} p-3 rounded-2xl max-w-[85%]">
+                        <p>${message}</p>
+                        <span class="text-xs ${role === 'user' ? 'text-blue-100' : 'text-gray-500'} mt-1 block">${time}</span>
+                    </div>
+                `;
+
+                messageDiv.innerHTML = content;
+                return messageDiv;
+            }
+
+            sendBtn.addEventListener('click', async () => {
+                const message = userInput.value.trim();
+                if (message) {
+                    // Add user message
+                    const userMessage = createMessageElement('user', message);
+                    chatContainer.appendChild(userMessage);
+                    userInput.value = '';
+
+                    // Add typing indicator
+                    const typingIndicator = document.createElement('div');
+                    typingIndicator.className = 'flex items-start space-x-2 typing-indicator';
+                    typingIndicator.innerHTML = `
+                        <div class="bg-blue-100 p-3 rounded-2xl">
+                            <div class="flex space-x-2">
+                                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
+                                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
+                            </div>
+                        </div>
+                    `;
+                    chatContainer.appendChild(typingIndicator);
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                    try {
+                        const response = await fetch('/chat', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ message, conversation_id: conversationId })
+                        });
+
+                        const data = await response.json();
+                        conversationId = data.conversation_id;
+
+                        // Remove typing indicator
+                        chatContainer.removeChild(typingIndicator);
+
+                        // Add bot response
+                        const botMessage = createMessageElement('assistant', data.response);
+                        chatContainer.appendChild(botMessage);
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
+                    } catch (error) {
+                        console.error('Error:', error);
+                        chatContainer.removeChild(typingIndicator);
+                        const errorMessage = createMessageElement('assistant', 'Sorry, an error occurred. Please try again.');
+                        chatContainer.appendChild(errorMessage);
+                    }
+                }
+            });
+
+            // Handle Enter key
+            userInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendBtn.click();
+                }
+            });
+
+            // Auto-focus input
+            userInput.focus();
+        });
+    </script>
+
+    <style>
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        #chat-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        #chat-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        #chat-container::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+    </style>
+</body>
+</html>

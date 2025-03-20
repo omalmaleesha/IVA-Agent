@@ -1,0 +1,13 @@
+flask
+pymongo
+python-dotenv
+groq
+pydantic
+pydantic-settings
+nltk
+numpy
+tensorflow
+scikit-learn
+flask-cors
+bcrypt
+pytest

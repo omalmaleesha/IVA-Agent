@@ -1,0 +1,327 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "Hello",
+        "Good morning",
+        "Good afternoon",
+        "Good evening",
+        "How are you",
+        "Is anyone there?",
+        "Hello there"
+      ],
+      "responses": [
+        "Hello! I'm your healthcare assistant. How can I help you today?",
+        "Hi there! Welcome to our healthcare system. How may I assist you?",
+        "Good day! I'm here to help with your healthcare needs. What can I do for you?"
+      ],
+      "context": []
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "See you later",
+        "Goodbye",
+        "Thanks, bye",
+        "That's all",
+        "Until next time"
+      ],
+      "responses": [
+        "Goodbye! Take care of your health.",
+        "Have a great day! Remember, your health is our priority.",
+        "Thank you for using our healthcare assistant. Stay healthy!"
+      ],
+      "context": []
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks",
+        "Thank you",
+        "That's helpful",
+        "Appreciate it",
+        "Thanks for the help"
+      ],
+      "responses": [
+        "You're welcome! Your health is our priority.",
+        "Happy to help! Is there anything else you need assistance with?",
+        "Glad I could assist. Your well-being matters to us."
+      ],
+      "context": []
+    },
+    {
+      "tag": "appointment_booking",
+      "patterns": [
+        "I need an appointment",
+        "Book an appointment",
+        "Schedule a visit",
+        "Make an appointment",
+        "I want to see a doctor",
+        "Can I book a slot",
+        "Need to visit a doctor"
+      ],
+      "responses": [
+        "I'd be happy to help you book an appointment. Let's start with your details.",
+        "Let's schedule your appointment. I'll need some information from you first.",
+        "I can help you book a visit. Let's begin with your basic information."
+      ],
+      "context": [
+        "patient_registration"
+      ]
+    },
+    {
+      "tag": "appointment_cancel",
+      "patterns": [
+        "Cancel my appointment",
+        "I need to cancel",
+        "Remove my booking",
+        "Can't make it to my appointment"
+      ],
+      "responses": [
+        "I can help you cancel your appointment. May I have your appointment details?",
+        "Sorry to hear you need to cancel. Could you provide your appointment information?",
+        "I'll assist with canceling your appointment. Please provide your booking details."
+      ],
+      "context": [
+        "appointment_details"
+      ]
+    },
+    {
+      "tag": "appointment_reschedule",
+      "patterns": [
+        "Reschedule appointment",
+        "Change my appointment time",
+        "Move my appointment",
+        "Different time for appointment"
+      ],
+      "responses": [
+        "I can help reschedule your appointment. Let me get your current appointment details first.",
+        "Happy to help you find a new time. What's your current appointment information?",
+        "Let's find a better time for you. Please share your existing appointment details."
+      ],
+      "context": [
+        "appointment_details"
+      ]
+    },
+    {
+      "tag": "doctor_availability",
+      "patterns": [
+        "When is Dr. Smith available",
+        "Doctor availability",
+        "Is the cardiologist free tomorrow?",
+        "Check doctor schedule",
+        "When can I see a pediatrician"
+      ],
+      "responses": [
+        "I can check doctor availability for you. Which specialist or doctor are you looking for?",
+        "Let me check the schedule. Could you specify which doctor or department you need?",
+        "I'll find available slots for you. Which doctor would you like to see?"
+      ],
+      "context": [
+        "doctor_selection"
+      ]
+    },
+    {
+      "tag": "patient_registration",
+      "patterns": [
+        "Register as a patient",
+        "New patient registration",
+        "Sign up as patient",
+        "How do I register?",
+        "I'm a new patient",
+        "Create patient profile"
+      ],
+      "responses": [
+        "I'll help you register as a patient. Let's start with your basic information.",
+        "Let's get you registered in our system. I'll need some details from you.",
+        "I can assist with your registration. Let's begin with your personal information."
+      ],
+      "context": [
+        "collect_patient_info"
+      ]
+    },
+    {
+      "tag": "symptoms",
+      "patterns": [
+        "I have a headache",
+        "My stomach hurts",
+        "I'm feeling dizzy",
+        "Fever and cough",
+        "Pain in my joints",
+        "I can't sleep",
+        "Having chest pain",
+        "My throat is sore"
+      ],
+      "responses": [
+        "I understand you're not feeling well. Could you provide more details about your symptoms?",
+        "I'm sorry to hear that. When did these symptoms start, and have you noticed any other issues?",
+        "Let me help you. Based on your symptoms, we should schedule you with an appropriate specialist."
+      ],
+      "context": [
+        "symptom_assessment"
+      ]
+    },
+    {
+      "tag": "department_info",
+      "patterns": [
+        "What departments do you have",
+        "Tell me about cardiology",
+        "Do you have pediatrics",
+        "Information about orthopedics",
+        "Specialties available"
+      ],
+      "responses": [
+        "Our healthcare system offers various departments including Cardiology, Orthopedics, Pediatrics, Neurology, Dermatology, and more. Which one would you like to know about?",
+        "We have multiple specialties including General Medicine, Surgery, OB-GYN, ENT, Ophthalmology, and many others. Would you like specific information about any department?",
+        "Our facility has comprehensive departments covering all major medical specialties. Could you specify which department you're interested in?"
+      ],
+      "context": [
+        "department_selection"
+      ]
+    },
+    {
+      "tag": "medical_records",
+      "patterns": [
+        "Access my medical records",
+        "View my health records",
+        "Get my test results",
+        "Check my medical history",
+        "Download my reports"
+      ],
+      "responses": [
+        "I can help you access your medical records. For security purposes, could you verify your identity first?",
+        "Your medical records are confidential. Let me verify your credentials before proceeding with your request.",
+        "To view your medical records, I'll need to authenticate your identity. Could you provide your patient ID and date of birth?"
+      ],
+      "context": [
+        "identity_verification"
+      ]
+    },
+    {
+      "tag": "insurance",
+      "patterns": [
+        "Do you accept my insurance",
+        "Insurance coverage",
+        "Is my policy valid here",
+        "Check insurance details",
+        "Insurance verification"
+      ],
+      "responses": [
+        "We work with most major insurance providers. Could you share your insurance carrier and policy number?",
+        "I'd be happy to verify your insurance coverage. Please provide your insurance details.",
+        "Let me check if your insurance is accepted. What insurance plan do you have?"
+      ],
+      "context": [
+        "insurance_verification"
+      ]
+    },
+    {
+      "tag": "working_hours",
+      "patterns": [
+        "When are you open",
+        "Working hours",
+        "Opening times",
+        "When does the clinic close",
+        "Weekend hours",
+        "Holiday schedule"
+      ],
+      "responses": [
+        "Our main facility is open Monday to Friday from 8:00 AM to 8:00 PM, and Saturday from 9:00 AM to 5:00 PM. We're closed on Sundays and major holidays.",
+        "Our regular hours are 8:00 AM to 8:00 PM on weekdays and 9:00 AM to 5:00 PM on Saturdays. Emergency services are available 24/7.",
+        "We operate from 8:00 AM to 8:00 PM Monday through Friday, and 9:00 AM to 5:00 PM on Saturdays. Different departments may have specific hours."
+      ],
+      "context": []
+    },
+    {
+      "tag": "emergency",
+      "patterns": [
+        "It's an emergency",
+        "Need urgent care",
+        "Severe pain",
+        "Accident",
+        "Heart attack symptoms",
+        "Can't breathe",
+        "Severe bleeding"
+      ],
+      "responses": [
+        "If this is a medical emergency, please call 911 or go to your nearest emergency room immediately. Do not wait for an online response.",
+        "Medical emergencies require immediate attention. Please call emergency services (911) right away or go to the nearest emergency department.",
+        "Your safety is paramount. For medical emergencies, disconnect and dial 911 now or have someone take you to the emergency room."
+      ],
+      "context": [
+        "emergency_protocol"
+      ]
+    },
+    {
+      "tag": "prescription_refill",
+      "patterns": [
+        "Refill my prescription",
+        "Need medication refill",
+        "Renew my meds",
+        "Running out of medication",
+        "Get more of my prescription"
+      ],
+      "responses": [
+        "I can help with prescription refills. Could you provide your prescription details and patient information?",
+        "For medication refills, I'll need information about your current prescription and your patient ID.",
+        "Let me assist with your prescription refill. Please share the medication name, dosage, and your patient information."
+      ],
+      "context": [
+        "prescription_details"
+      ]
+    },
+    {
+      "tag": "covid",
+      "patterns": [
+        "Covid test",
+        "Covid vaccine",
+        "Coronavirus symptoms",
+        "Covid protocols",
+        "Covid booster",
+        "Covid isolation rules"
+      ],
+      "responses": [
+        "We offer COVID-19 testing and vaccination services. Would you like information about testing, vaccines, or COVID protocols?",
+        "Our facility provides COVID-19 services including testing and vaccination. What specific information do you need?",
+        "For COVID-19 concerns, we have dedicated services. Are you interested in testing, vaccination, or information about symptoms?"
+      ],
+      "context": [
+        "covid_services"
+      ]
+    },
+    {
+      "tag": "location",
+      "patterns": [
+        "Where are you located",
+        "Clinic address",
+        "How to get there",
+        "Directions to the hospital",
+        "Where is your facility",
+        "Parking information"
+      ],
+      "responses": [
+        "Our main healthcare facility is located at 123 Health Avenue, Medical District, City. We have ample parking available for patients and visitors.",
+        "You can find us at 123 Health Avenue in the Medical District. Public transportation options are available, and we offer validated parking.",
+        "We're located at 123 Health Avenue. Our facility is accessible via major bus routes, and we have dedicated patient parking areas."
+      ],
+      "context": []
+    },
+    {
+      "tag": "fallback",
+      "patterns": [
+        "what is panadol"
+      ],
+      "responses": [
+        "I'm not sure I understand. As your healthcare assistant, I can help with appointments, patient registration, medical departments, and general healthcare inquiries. Could you please rephrase?",
+        "I apologize, but I didn't quite catch that. I'm here to assist with healthcare-related matters like scheduling, registration, and medical information. How can I help you?",
+        "I'm sorry, I'm having trouble understanding your request. I'm specialized in healthcare services such as appointments, registrations, and medical information. Could you provide more details?",
+        "Panadol is a brand name for a type of over-the-counter (OTC) medication that contains the active ingredient paracetamol (also known as acetaminophen in some countries). Paracetamol is a pain reliever and fever reducer that is commonly used to treat:\n\n* Headaches\n* Toothaches\n* Back pain\n* Menstrual cramps\n* Fever\n* Cold and flu symptoms\n\nPanadol is often available in various forms, such as tablets, capsules, or liquid suspensions, and can be taken orally. It is generally considered safe and effective when used as directed, but it's essential to follow the recommended dosage and consult with a healthcare professional if you have any concerns or questions.\n\nIt's also important to note that while Panadol can help alleviate symptoms, it's not a substitute for medical treatment. If you're experiencing persistent or severe pain, or if your symptoms worsen over time, it's best to consult with a doctor to determine the underlying cause and receive proper treatment.\n\nWould you like to know more about the proper use of Panadol or have any specific questions about its use?"
+      ],
+      "context": []
+    }
+  ]
+}
