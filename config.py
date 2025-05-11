@@ -12,5 +12,6 @@ class Settings(BaseSettings):
     LLM_TEMPERATURE: float
     INTENTS_FILE: str
     MODEL_DIR: str
+    POSTGRES_URI: str
 
 settings = Settings()

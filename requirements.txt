@@ -11,3 +11,4 @@ scikit-learn
 flask-cors
 bcrypt
 pytest
+psycopg2
